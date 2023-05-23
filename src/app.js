@@ -193,9 +193,6 @@ window.onload = function () {
     divOrdenadas.innerHTML = "";
     // Tomo el valor actual que tenga el input y lo asigno a una variable
     let input = document.getElementById('inputRepetir').value;
-    // let sorteo = document.getElementById('divSorteo');
-    // // Si la cantidad de nodos hijos = 1 crea la carta
-    // sorteo.childNodes.length == 1 ?  : null
     crearCarta(input)
   });
 
