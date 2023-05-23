@@ -139,13 +139,12 @@ window.onload = function () {
   // Creando la funcion bubbleSort
   function bubbleSort(inputArr) {
     // Defino el largo del array
-    let n = inputArr.length;
-    for (let k = 1; k < n; k++) {
-      for (let i = 0; i < (n - k); i++) {
-        if (inputArr[i].numero > inputArr[i + 1].numero) {
-          let aux = inputArr[i].numero;
-          inputArr[i].numero = inputArr[i + 1].numero;
-          inputArr[i + 1].numero = aux;
+    for (let i = 0; i < inputArr.length; i++) {
+      for (let j = 0; j < (inputArr.length - i - 1); j++) {
+        if (inputArr[j].numero > inputArr[j + 1].numero) {
+          let aux = inputArr[j];
+          inputArr[j] = inputArr[j + 1];
+          inputArr[j + 1] = aux;
           crearCartasSorteadas(inputArr)
         }
       }
@@ -159,27 +158,27 @@ window.onload = function () {
     let valorFinal = [];
     // Pregunto si existe alguna carta antes de ejecutar
     if (sorteo.childNodes.length >= 1) {
-      for (let i = 1; i < sorteo.childNodes.length; i++) {
-        let cartaActuaL = document.getElementById(`divCarta${i}`);
+      for (let i = 0; i < sorteo.childNodes.length; i++) {
+        let cartaActuaL = document.getElementById(`divCarta${i + 1}`);
         let clasesActuales = cartaActuaL.lastChild.className;
         let valorActual = cartaActuaL.lastChild.textContent;
 
         // Para hacerlo mas facil, volvere a convertir las letras a numeros y los almacenare en un array
         switch (valorActual) {
           case 'J':
-            valorFinal[i - 1] = { numero: 11, clase: clasesActuales };
+            valorFinal[i] = { numero: 11, clase: clasesActuales };
             break;
           case 'Q':
-            valorFinal[i - 1] = { numero: 12, clase: clasesActuales };
+            valorFinal[i] = { numero: 12, clase: clasesActuales };
             break;
           case 'K':
-            valorFinal[i - 1] = { numero: 13, clase: clasesActuales };
+            valorFinal[i] = { numero: 13, clase: clasesActuales };
             break;
           case 'A':
-            valorFinal[i - 1] = { numero: 14, clase: clasesActuales };
+            valorFinal[i] = { numero: 14, clase: clasesActuales };
             break;
           default:
-            valorFinal[i - 1] = { numero: parseInt(valorActual), clase: clasesActuales };
+            valorFinal[i] = { numero: parseInt(valorActual), clase: clasesActuales };
             break;
         }
       }
@@ -190,18 +189,21 @@ window.onload = function () {
   //--------------------------------------------------------------------------------------------------------------------
   // Añado un Event Listener a el boton robar
   botonRobar.addEventListener("click", function () {
+    divSorteo.innerHTML = "";
+    divOrdenadas.innerHTML = "";
     // Tomo el valor actual que tenga el input y lo asigno a una variable
     let input = document.getElementById('inputRepetir').value;
-    let sorteo = document.getElementById('divSorteo');
-    // Si la cantidad de nodos hijos = 1 crea la carta
-    sorteo.childNodes.length == 1 ? crearCarta(input) : null
+    // let sorteo = document.getElementById('divSorteo');
+    // // Si la cantidad de nodos hijos = 1 crea la carta
+    // sorteo.childNodes.length == 1 ?  : null
+    crearCarta(input)
   });
 
   //--------------------------------------------------------------------------------------------------------------------
   // Boton para ordenar las cartas con el metodo de ordenamiento bubbleSort
   botonOrdenar.addEventListener("click", function () {
     // Si existe algun elemento con la clase divOrdenadas 
-    if (divOrdenadas.childNodes.length <= 1) {
+    if (divOrdenadas.childNodes.length <= 0) {
       // Llamo a la funcion para ordenar con los valores pasados de carta => numeros
       bubbleSort(obtenerValores())
     }
