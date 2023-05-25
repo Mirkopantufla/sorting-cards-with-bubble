@@ -96,7 +96,7 @@ window.onload = function () {
       let simboloCarta;
 
       switch (numero) {
-        case 14:
+        case 1:
           simboloCarta = "A";
           break;
         case 11:
@@ -175,7 +175,7 @@ window.onload = function () {
             valorFinal[i] = { numero: 13, clase: clasesActuales };
             break;
           case 'A':
-            valorFinal[i] = { numero: 14, clase: clasesActuales };
+            valorFinal[i] = { numero: 1, clase: clasesActuales };
             break;
           default:
             valorFinal[i] = { numero: parseInt(valorActual), clase: clasesActuales };
